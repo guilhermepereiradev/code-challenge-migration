@@ -106,3 +106,60 @@ mvn clean test
 
 - Entregar o projeto em container será um diferencial.
 - Fica a critério do desenvolvedor inserir ou remover dependencias do projeto para garantir o objetivo do challenge.
+
+# Entrega
+## Para executar o projeto após migração
+
+### Pré-requisitos
+
+- **Java 17**
+- **Maven 3.8.x**
+
+### Executar a Aplicação
+- Execute os mesmos descritos [aqui](#executar-a-aplicação) ou execute os seguintes comandos `docker` no diretorio raiz do projeto:
+    ```bash
+    docker build -t "dummyjson-client" .
+    docker run -p 8080:8080 "dummyjson-client"
+    ```
+### Endpoints
+### `GET` /health
+- Descrição:
+   - Verifica o status do serviço.
+- Response
+   - HTTP status: `200 OK`.
+   ```json
+    {
+      "service": "dummyjson-client",
+      "status": "UP"
+    }
+   ```
+
+### `GET` /api/products
+- Descrição:
+   - Lista todos os produtos.
+- Response
+   - HTTP status: `200 OK`.
+   ```json
+    [
+      {
+        "id": 1,
+        "title": "Product One",
+        "description": "Product One Description",
+        "price": 9.99
+      }
+    ]
+   ```
+
+### `GET` /api/products/{id}
+- Descrição:
+   - Busca produto pelo ID.
+- Response
+   - HTTP status: `200 OK`.
+   ```json
+   {
+     "id": 1,
+     "title": "Product One",
+     "description": "Product One Description",
+     "price": 9.99
+   }
+   ```
