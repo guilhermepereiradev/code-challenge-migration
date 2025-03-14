@@ -1,2 +1,8 @@
 server:
   port: 8080
+  error:
+    include-message: always
+
+dummyjson:
+  api:
+    url: ${API_URL:https://dummyjson.com/products}

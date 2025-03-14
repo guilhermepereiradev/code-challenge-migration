@@ -1,13 +1,14 @@
 package com.example.dummyjson.service;
 
+import com.example.dummyjson.client.ProductClient;
 import com.example.dummyjson.dto.Product;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +21,7 @@ public class ProductServiceTest {
     private ProductService productService;
 
     @Mock
-    private RestTemplate restTemplate;
+    private ProductClient productClient;
 
     @Test
     public void testGetAllProducts() {
@@ -32,8 +33,8 @@ public class ProductServiceTest {
         product2.setId(2L);
         product2.setTitle("Product 2");
 
-        Product[] products = {product1, product2};
-        when(restTemplate.getForObject("https://dummyjson.com/products", Product[].class)).thenReturn(products);
+        List<Product> products = Arrays.asList(product1, product2);
+        when(productClient.getAllProducts()).thenReturn(products);
 
         List<Product> result = productService.getAllProducts();
         assertEquals(2, result.size());
@@ -46,7 +47,7 @@ public class ProductServiceTest {
         product.setId(1L);
         product.setTitle("Product 1");
 
-        when(restTemplate.getForObject("https://dummyjson.com/products/1", Product.class)).thenReturn(product);
+        when(productClient.getProductById(1L)).thenReturn(product);
 
         Product result = productService.getProductById(1L);
         assertEquals("Product 1", result.getTitle());
