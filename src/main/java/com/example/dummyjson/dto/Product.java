@@ -20,6 +20,15 @@ public class Product {
     @NotNull
     private Double price;
 
+    public Product() {}
+
+    public Product(Long id, String title, String description, Double price) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+    }
+
     // Getters and Setters
 
     public Long getId() {
