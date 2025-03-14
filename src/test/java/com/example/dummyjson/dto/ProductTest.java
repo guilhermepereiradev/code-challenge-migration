@@ -1,13 +1,13 @@
 package com.example.dummyjson.dto;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.validation.constraints.NotNull;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ExtendWith(MockitoExtension.class)
 public class ProductTest {
 
     @Test
@@ -15,17 +15,17 @@ public class ProductTest {
         Long expectId = 1L;
         String expectedTitle = "A dummy title";
         String expectedDescription = "A dummy description";
-        Double expectedPrice = new Double("2.1");
+        Double expectedPrice = Double.valueOf("2.1");
 
         Product product1 = new Product();
         product1.setId(1L);
         product1.setTitle("A dummy title");
         product1.setDescription("A dummy description");
-        product1.setPrice(new Double("2.1"));
+        product1.setPrice(Double.valueOf("2.1"));
 
-        Assert.assertEquals(expectId, product1.getId());
-        Assert.assertEquals(expectedTitle, product1.getTitle());
-        Assert.assertEquals(expectedDescription, product1.getDescription());
-        Assert.assertEquals(expectedPrice, product1.getPrice());
+        assertEquals(expectId, product1.getId());
+        assertEquals(expectedTitle, product1.getTitle());
+        assertEquals(expectedDescription, product1.getDescription());
+        assertEquals(expectedPrice, product1.getPrice());
     }
 }
